@@ -8,7 +8,7 @@ import (
 	"net"
 	"strings"
 
-	pb "grpc-loggy/proto"
+	pb "grpc-loggy/proto/v1"
 
 	"google.golang.org/grpc"
 )
@@ -16,7 +16,7 @@ import (
 var port = flag.Int("port", 50051, "The server port")
 
 type server struct {
-	pb.UnimplementedLoggyServer
+	pb.UnimplementedLoggyServiceServer
 	activeLogs  []*pb.Log
 	archiveLogs []*pb.Log
 }
@@ -32,17 +32,17 @@ func findSubstring(sliceStrings []*pb.Log, substring string) []*pb.Log {
 	return matches
 }
 
-func (s *server) SearchLogs(_ context.Context, in *pb.SearchRequest) (*pb.SearchResponse, error) {
+func (s *server) SearchLogs(_ context.Context, in *pb.SearchLogsRequest) (*pb.SearchLogsResponse, error) {
 	log.Printf("Received %v", in.GetQuery())
 	matches := findSubstring(s.activeLogs, in.GetQuery())
 	var res []*pb.Log
 	for _, l := range matches {
 		res = append(res, &pb.Log{Content: l.Content, Level: l.Level, Origin: l.Origin})
 	}
-	return &pb.SearchResponse{TotalCount: int32(len(res)), Log: res}, nil
+	return &pb.SearchLogsResponse{TotalCount: int32(len(res)), Log: res}, nil
 }
 
-func (s *server) StreamLogs(stream pb.Loggy_StreamLogsServer) error {
+func (s *server) StreamLogs(stream pb.LoggyService_StreamLogsServer) error {
 	for {
 		msg, err := stream.Recv()
 		// TODO: handle EOF here first
@@ -50,11 +50,11 @@ func (s *server) StreamLogs(stream pb.Loggy_StreamLogsServer) error {
 			return err
 		}
 
-		if len(s.activeLogs) == 10000 {
+		if len(s.activeLogs) != 10000 {
+			s.activeLogs = append(s.activeLogs, msg.Log)
+		} else {
 			s.archiveLogs = s.activeLogs
 			s.activeLogs = []*pb.Log{}
-		} else {
-			s.activeLogs = append(s.activeLogs, msg)
 		}
 	}
 }
@@ -66,7 +66,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterLoggyServer(s, &server{})
+	pb.RegisterLoggyServiceServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

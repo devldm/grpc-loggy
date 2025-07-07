@@ -1,0 +1,35 @@
+syntax = "proto3";
+package proto.v1;
+
+option go_package = "./proto";
+
+service LoggyService {
+  rpc StreamLogs(stream StreamLogsRequest) returns (StreamLogsResponse);
+  rpc SearchLogs(SearchLogsRequest) returns (SearchLogsResponse);
+}
+
+message SearchLogsRequest {
+  int32 search_id = 1;
+  string query = 2;
+}
+
+message EmptyResponse {}
+
+message StreamLogsResponse {
+  EmptyResponse res = 1;
+}
+
+message Log {
+  string level = 1;
+  string content = 2;
+  string origin = 3;
+}
+
+message StreamLogsRequest {
+  Log log = 1;
+}
+
+message SearchLogsResponse {
+  int32 total_count = 1;
+  repeated Log log = 2;
+}
