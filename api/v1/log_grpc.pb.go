@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.19.6
-// source: proto/v1/log.proto
+// source: api/v1/log.proto
 
-package proto
+package __
 
 import (
 	context "context"
@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LoggyService_StreamLogs_FullMethodName = "/proto.v1.LoggyService/StreamLogs"
-	LoggyService_SearchLogs_FullMethodName = "/proto.v1.LoggyService/SearchLogs"
+	LoggyService_StreamLogs_FullMethodName  = "/api.v1.LoggyService/StreamLogs"
+	LoggyService_SearchLogs_FullMethodName  = "/api.v1.LoggyService/SearchLogs"
+	LoggyService_GetLogCount_FullMethodName = "/api.v1.LoggyService/GetLogCount"
 )
 
 // LoggyServiceClient is the client API for LoggyService service.
@@ -29,6 +30,7 @@ const (
 type LoggyServiceClient interface {
 	StreamLogs(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[StreamLogsRequest, StreamLogsResponse], error)
 	SearchLogs(ctx context.Context, in *SearchLogsRequest, opts ...grpc.CallOption) (*SearchLogsResponse, error)
+	GetLogCount(ctx context.Context, in *GetLogCountRequest, opts ...grpc.CallOption) (*GetLogCountResponse, error)
 }
 
 type loggyServiceClient struct {
@@ -62,12 +64,23 @@ func (c *loggyServiceClient) SearchLogs(ctx context.Context, in *SearchLogsReque
 	return out, nil
 }
 
+func (c *loggyServiceClient) GetLogCount(ctx context.Context, in *GetLogCountRequest, opts ...grpc.CallOption) (*GetLogCountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLogCountResponse)
+	err := c.cc.Invoke(ctx, LoggyService_GetLogCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LoggyServiceServer is the server API for LoggyService service.
 // All implementations must embed UnimplementedLoggyServiceServer
 // for forward compatibility.
 type LoggyServiceServer interface {
 	StreamLogs(grpc.ClientStreamingServer[StreamLogsRequest, StreamLogsResponse]) error
 	SearchLogs(context.Context, *SearchLogsRequest) (*SearchLogsResponse, error)
+	GetLogCount(context.Context, *GetLogCountRequest) (*GetLogCountResponse, error)
 	mustEmbedUnimplementedLoggyServiceServer()
 }
 
@@ -83,6 +96,9 @@ func (UnimplementedLoggyServiceServer) StreamLogs(grpc.ClientStreamingServer[Str
 }
 func (UnimplementedLoggyServiceServer) SearchLogs(context.Context, *SearchLogsRequest) (*SearchLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchLogs not implemented")
+}
+func (UnimplementedLoggyServiceServer) GetLogCount(context.Context, *GetLogCountRequest) (*GetLogCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLogCount not implemented")
 }
 func (UnimplementedLoggyServiceServer) mustEmbedUnimplementedLoggyServiceServer() {}
 func (UnimplementedLoggyServiceServer) testEmbeddedByValue()                      {}
@@ -130,16 +146,38 @@ func _LoggyService_SearchLogs_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LoggyService_GetLogCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLogCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoggyServiceServer).GetLogCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoggyService_GetLogCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoggyServiceServer).GetLogCount(ctx, req.(*GetLogCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LoggyService_ServiceDesc is the grpc.ServiceDesc for LoggyService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LoggyService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.v1.LoggyService",
+	ServiceName: "api.v1.LoggyService",
 	HandlerType: (*LoggyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SearchLogs",
 			Handler:    _LoggyService_SearchLogs_Handler,
+		},
+		{
+			MethodName: "GetLogCount",
+			Handler:    _LoggyService_GetLogCount_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
@@ -149,5 +187,5 @@ var LoggyService_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "proto/v1/log.proto",
+	Metadata: "api/v1/log.proto",
 }

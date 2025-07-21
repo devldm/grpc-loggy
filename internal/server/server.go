@@ -1,25 +1,19 @@
-package main
+package server
 
 import (
 	"context"
 	"encoding/json"
-	"flag"
 	"fmt"
-	"grpc-loggy/redispkg"
+	pb "grpc-loggy/api/v1"
+	"grpc-loggy/internal/storage"
 	"log"
-	"net"
 	"strings"
 
-	pb "grpc-loggy/proto/v1"
-
 	"github.com/redis/go-redis/v9"
-
 	"google.golang.org/grpc"
 )
 
-var port = flag.Int("port", 50051, "The server port")
-
-type server struct {
+type grpcServer struct {
 	pb.UnimplementedLoggyServiceServer
 	activeLogs  []*pb.Log
 	archiveLogs []*pb.Log
@@ -37,7 +31,7 @@ func findSubstring(sliceStrings []*pb.Log, substring string) []*pb.Log {
 	return matches
 }
 
-func (s *server) SearchLogs(ctx context.Context, in *pb.SearchLogsRequest) (*pb.SearchLogsResponse, error) {
+func (s *grpcServer) SearchLogs(ctx context.Context, in *pb.SearchLogsRequest) (*pb.SearchLogsResponse, error) {
 	log.Printf("Received %v", in.GetQuery())
 	cachedState, err := s.redisClient.HGet(ctx, string(in.GetQuery()), "logs").Result()
 	if err != nil {
@@ -73,7 +67,7 @@ func (s *server) SearchLogs(ctx context.Context, in *pb.SearchLogsRequest) (*pb.
 	return &pb.SearchLogsResponse{TotalCount: int32(len(res)), Log: res}, nil
 }
 
-func (s *server) StreamLogs(stream pb.LoggyService_StreamLogsServer) error {
+func (s *grpcServer) StreamLogs(stream pb.LoggyService_StreamLogsServer) error {
 	for {
 		msg, err := stream.Recv()
 		// TODO: handle EOF here first
@@ -90,16 +84,28 @@ func (s *server) StreamLogs(stream pb.LoggyService_StreamLogsServer) error {
 	}
 }
 
-func main() {
-	flag.Parse()
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+func (s *grpcServer) GetLogCount(ctx context.Context, in *pb.GetLogCountRequest) (*pb.GetLogCountResponse, error) {
+	activeCount := len(s.activeLogs)
+	totalCount := activeCount + len(s.archiveLogs)
+
+	resp := &pb.GetLogCountResponse{
+		TotalCount:  int32(totalCount),
+		ActiveCount: int32(activeCount),
 	}
-	s := grpc.NewServer()
-	pb.RegisterLoggyServiceServer(s, &server{redisClient: redispkg.Connect()})
-	log.Printf("server listening at %v", lis.Addr())
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+
+	if in.IncludeArchive {
+		archiveCount := int32(len(s.archiveLogs))
+		resp.ArchiveCount = &archiveCount
 	}
+
+	return resp, nil
+}
+
+func NewGRPCServer() *grpc.Server {
+	gsrv := grpc.NewServer()
+	srv := grpcServer{
+		redisClient: storage.NewRedisClient(),
+	}
+	pb.RegisterLoggyServiceServer(gsrv, &srv)
+	return gsrv
 }

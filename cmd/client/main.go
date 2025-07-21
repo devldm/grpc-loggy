@@ -3,7 +3,8 @@ package main
 import (
 	"context"
 	"flag"
-	pb "grpc-loggy/proto/v1"
+	"fmt"
+	pb "grpc-loggy/api/v1"
 	"log"
 	"math/rand"
 	"time"
@@ -12,7 +13,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-var addr = flag.String("addr", "localhost:50051", "the address to connect to")
+var addr = flag.String("addr", "localhost:8080", "the address to connect to")
 
 func seedLogs() []*pb.Log {
 	s := rand.NewSource(time.Now().Unix())
@@ -31,7 +32,6 @@ func seedLogs() []*pb.Log {
 }
 
 func main() {
-	flag.Parse()
 	conn, err := grpc.NewClient(*addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -39,7 +39,7 @@ func main() {
 	defer conn.Close()
 	c := pb.NewLoggyServiceClient(conn)
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 	defer cancel()
 	logStream := seedLogs()
 	stream, err := c.StreamLogs(ctx)
@@ -57,11 +57,33 @@ func main() {
 	}
 
 	stream.CloseAndRecv()
-	r, err := c.SearchLogs(ctx, &pb.SearchLogsRequest{SearchId: 10, Query: "failed"})
+	count, err := c.GetLogCount(ctx, &pb.GetLogCountRequest{IncludeArchive: true})
 	if err != nil {
-		log.Fatalf("Could not search logs: %v", err)
+		log.Fatalf("Err: %v", err)
 	}
-	for _, cont := range r.GetLog() {
-		log.Printf("Log: %s", cont.String())
+
+	fmt.Printf("Total Logs: %v\nActive logs: %v\nArchived Logs: %v\n\n", count.TotalCount, count.ActiveCount, *count.ArchiveCount)
+
+	for {
+		fmt.Println("Please enter your search query: ")
+		var query string
+		_, err = fmt.Scanln(&query)
+		if err != nil {
+			log.Fatalf("Failed to get or parse input query.")
+		}
+
+		r, err := c.SearchLogs(ctx, &pb.SearchLogsRequest{SearchId: 10, Query: query})
+		if err != nil {
+			log.Fatalf("Could not search logs: %v", err)
+		}
+
+		if r.TotalCount <= 0 {
+			log.Printf("No logs found with query: %s", query)
+		} else {
+			for _, cont := range r.GetLog() {
+				log.Printf("Log: %s", cont.String())
+			}
+			log.Printf("\n\nTotal results: %v\n", r.TotalCount)
+		}
 	}
 }

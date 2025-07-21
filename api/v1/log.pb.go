@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v3.19.6
-// source: proto/v1/log.proto
+// source: api/v1/log.proto
 
-package proto
+package __
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -31,7 +31,7 @@ type SearchLogsRequest struct {
 
 func (x *SearchLogsRequest) Reset() {
 	*x = SearchLogsRequest{}
-	mi := &file_proto_v1_log_proto_msgTypes[0]
+	mi := &file_api_v1_log_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *SearchLogsRequest) String() string {
 func (*SearchLogsRequest) ProtoMessage() {}
 
 func (x *SearchLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_v1_log_proto_msgTypes[0]
+	mi := &file_api_v1_log_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *SearchLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchLogsRequest.ProtoReflect.Descriptor instead.
 func (*SearchLogsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_v1_log_proto_rawDescGZIP(), []int{0}
+	return file_api_v1_log_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *SearchLogsRequest) GetSearchId() int32 {
@@ -81,7 +81,7 @@ type EmptyResponse struct {
 
 func (x *EmptyResponse) Reset() {
 	*x = EmptyResponse{}
-	mi := &file_proto_v1_log_proto_msgTypes[1]
+	mi := &file_api_v1_log_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -93,7 +93,7 @@ func (x *EmptyResponse) String() string {
 func (*EmptyResponse) ProtoMessage() {}
 
 func (x *EmptyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_v1_log_proto_msgTypes[1]
+	mi := &file_api_v1_log_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,7 +106,7 @@ func (x *EmptyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmptyResponse.ProtoReflect.Descriptor instead.
 func (*EmptyResponse) Descriptor() ([]byte, []int) {
-	return file_proto_v1_log_proto_rawDescGZIP(), []int{1}
+	return file_api_v1_log_proto_rawDescGZIP(), []int{1}
 }
 
 type StreamLogsResponse struct {
@@ -118,7 +118,7 @@ type StreamLogsResponse struct {
 
 func (x *StreamLogsResponse) Reset() {
 	*x = StreamLogsResponse{}
-	mi := &file_proto_v1_log_proto_msgTypes[2]
+	mi := &file_api_v1_log_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -130,7 +130,7 @@ func (x *StreamLogsResponse) String() string {
 func (*StreamLogsResponse) ProtoMessage() {}
 
 func (x *StreamLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_v1_log_proto_msgTypes[2]
+	mi := &file_api_v1_log_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -143,7 +143,7 @@ func (x *StreamLogsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLogsResponse.ProtoReflect.Descriptor instead.
 func (*StreamLogsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_v1_log_proto_rawDescGZIP(), []int{2}
+	return file_api_v1_log_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *StreamLogsResponse) GetRes() *EmptyResponse {
@@ -164,7 +164,7 @@ type Log struct {
 
 func (x *Log) Reset() {
 	*x = Log{}
-	mi := &file_proto_v1_log_proto_msgTypes[3]
+	mi := &file_api_v1_log_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +176,7 @@ func (x *Log) String() string {
 func (*Log) ProtoMessage() {}
 
 func (x *Log) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_v1_log_proto_msgTypes[3]
+	mi := &file_api_v1_log_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +189,7 @@ func (x *Log) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Log.ProtoReflect.Descriptor instead.
 func (*Log) Descriptor() ([]byte, []int) {
-	return file_proto_v1_log_proto_rawDescGZIP(), []int{3}
+	return file_api_v1_log_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Log) GetLevel() string {
@@ -222,7 +222,7 @@ type StreamLogsRequest struct {
 
 func (x *StreamLogsRequest) Reset() {
 	*x = StreamLogsRequest{}
-	mi := &file_proto_v1_log_proto_msgTypes[4]
+	mi := &file_api_v1_log_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +234,7 @@ func (x *StreamLogsRequest) String() string {
 func (*StreamLogsRequest) ProtoMessage() {}
 
 func (x *StreamLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_v1_log_proto_msgTypes[4]
+	mi := &file_api_v1_log_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +247,7 @@ func (x *StreamLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLogsRequest.ProtoReflect.Descriptor instead.
 func (*StreamLogsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_v1_log_proto_rawDescGZIP(), []int{4}
+	return file_api_v1_log_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *StreamLogsRequest) GetLog() *Log {
@@ -267,7 +267,7 @@ type SearchLogsResponse struct {
 
 func (x *SearchLogsResponse) Reset() {
 	*x = SearchLogsResponse{}
-	mi := &file_proto_v1_log_proto_msgTypes[5]
+	mi := &file_api_v1_log_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +279,7 @@ func (x *SearchLogsResponse) String() string {
 func (*SearchLogsResponse) ProtoMessage() {}
 
 func (x *SearchLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_v1_log_proto_msgTypes[5]
+	mi := &file_api_v1_log_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +292,7 @@ func (x *SearchLogsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchLogsResponse.ProtoReflect.Descriptor instead.
 func (*SearchLogsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_v1_log_proto_rawDescGZIP(), []int{5}
+	return file_api_v1_log_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SearchLogsResponse) GetTotalCount() int32 {
@@ -309,89 +309,207 @@ func (x *SearchLogsResponse) GetLog() []*Log {
 	return nil
 }
 
-var File_proto_v1_log_proto protoreflect.FileDescriptor
+type GetLogCountRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	IncludeArchive bool                   `protobuf:"varint,1,opt,name=include_archive,json=includeArchive,proto3" json:"include_archive,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
 
-const file_proto_v1_log_proto_rawDesc = "" +
+func (x *GetLogCountRequest) Reset() {
+	*x = GetLogCountRequest{}
+	mi := &file_api_v1_log_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogCountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogCountRequest) ProtoMessage() {}
+
+func (x *GetLogCountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_log_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogCountRequest.ProtoReflect.Descriptor instead.
+func (*GetLogCountRequest) Descriptor() ([]byte, []int) {
+	return file_api_v1_log_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetLogCountRequest) GetIncludeArchive() bool {
+	if x != nil {
+		return x.IncludeArchive
+	}
+	return false
+}
+
+type GetLogCountResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TotalCount    int32                  `protobuf:"varint,1,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	ActiveCount   int32                  `protobuf:"varint,2,opt,name=active_count,json=activeCount,proto3" json:"active_count,omitempty"`
+	ArchiveCount  *int32                 `protobuf:"varint,3,opt,name=archive_count,json=archiveCount,proto3,oneof" json:"archive_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLogCountResponse) Reset() {
+	*x = GetLogCountResponse{}
+	mi := &file_api_v1_log_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogCountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogCountResponse) ProtoMessage() {}
+
+func (x *GetLogCountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_log_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogCountResponse.ProtoReflect.Descriptor instead.
+func (*GetLogCountResponse) Descriptor() ([]byte, []int) {
+	return file_api_v1_log_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetLogCountResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *GetLogCountResponse) GetActiveCount() int32 {
+	if x != nil {
+		return x.ActiveCount
+	}
+	return 0
+}
+
+func (x *GetLogCountResponse) GetArchiveCount() int32 {
+	if x != nil && x.ArchiveCount != nil {
+		return *x.ArchiveCount
+	}
+	return 0
+}
+
+var File_api_v1_log_proto protoreflect.FileDescriptor
+
+const file_api_v1_log_proto_rawDesc = "" +
 	"\n" +
-	"\x12proto/v1/log.proto\x12\bproto.v1\"F\n" +
+	"\x10api/v1/log.proto\x12\x06api.v1\"F\n" +
 	"\x11SearchLogsRequest\x12\x1b\n" +
 	"\tsearch_id\x18\x01 \x01(\x05R\bsearchId\x12\x14\n" +
 	"\x05query\x18\x02 \x01(\tR\x05query\"\x0f\n" +
-	"\rEmptyResponse\"?\n" +
-	"\x12StreamLogsResponse\x12)\n" +
-	"\x03res\x18\x01 \x01(\v2\x17.proto.v1.EmptyResponseR\x03res\"M\n" +
+	"\rEmptyResponse\"=\n" +
+	"\x12StreamLogsResponse\x12'\n" +
+	"\x03res\x18\x01 \x01(\v2\x15.api.v1.EmptyResponseR\x03res\"M\n" +
 	"\x03Log\x12\x14\n" +
 	"\x05level\x18\x01 \x01(\tR\x05level\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x16\n" +
-	"\x06origin\x18\x03 \x01(\tR\x06origin\"4\n" +
-	"\x11StreamLogsRequest\x12\x1f\n" +
-	"\x03log\x18\x01 \x01(\v2\r.proto.v1.LogR\x03log\"V\n" +
+	"\x06origin\x18\x03 \x01(\tR\x06origin\"2\n" +
+	"\x11StreamLogsRequest\x12\x1d\n" +
+	"\x03log\x18\x01 \x01(\v2\v.api.v1.LogR\x03log\"T\n" +
 	"\x12SearchLogsResponse\x12\x1f\n" +
 	"\vtotal_count\x18\x01 \x01(\x05R\n" +
-	"totalCount\x12\x1f\n" +
-	"\x03log\x18\x02 \x03(\v2\r.proto.v1.LogR\x03log2\xa2\x01\n" +
-	"\fLoggyService\x12I\n" +
+	"totalCount\x12\x1d\n" +
+	"\x03log\x18\x02 \x03(\v2\v.api.v1.LogR\x03log\"=\n" +
+	"\x12GetLogCountRequest\x12'\n" +
+	"\x0finclude_archive\x18\x01 \x01(\bR\x0eincludeArchive\"\x95\x01\n" +
+	"\x13GetLogCountResponse\x12\x1f\n" +
+	"\vtotal_count\x18\x01 \x01(\x05R\n" +
+	"totalCount\x12!\n" +
+	"\factive_count\x18\x02 \x01(\x05R\vactiveCount\x12(\n" +
+	"\rarchive_count\x18\x03 \x01(\x05H\x00R\farchiveCount\x88\x01\x01B\x10\n" +
+	"\x0e_archive_count2\xe2\x01\n" +
+	"\fLoggyService\x12E\n" +
 	"\n" +
-	"StreamLogs\x12\x1b.proto.v1.StreamLogsRequest\x1a\x1c.proto.v1.StreamLogsResponse(\x01\x12G\n" +
+	"StreamLogs\x12\x19.api.v1.StreamLogsRequest\x1a\x1a.api.v1.StreamLogsResponse(\x01\x12C\n" +
 	"\n" +
-	"SearchLogs\x12\x1b.proto.v1.SearchLogsRequest\x1a\x1c.proto.v1.SearchLogsResponseB\tZ\a./protob\x06proto3"
+	"SearchLogs\x12\x19.api.v1.SearchLogsRequest\x1a\x1a.api.v1.SearchLogsResponse\x12F\n" +
+	"\vGetLogCount\x12\x1a.api.v1.GetLogCountRequest\x1a\x1b.api.v1.GetLogCountResponseB\x04Z\x02./b\x06proto3"
 
 var (
-	file_proto_v1_log_proto_rawDescOnce sync.Once
-	file_proto_v1_log_proto_rawDescData []byte
+	file_api_v1_log_proto_rawDescOnce sync.Once
+	file_api_v1_log_proto_rawDescData []byte
 )
 
-func file_proto_v1_log_proto_rawDescGZIP() []byte {
-	file_proto_v1_log_proto_rawDescOnce.Do(func() {
-		file_proto_v1_log_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_v1_log_proto_rawDesc), len(file_proto_v1_log_proto_rawDesc)))
+func file_api_v1_log_proto_rawDescGZIP() []byte {
+	file_api_v1_log_proto_rawDescOnce.Do(func() {
+		file_api_v1_log_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_v1_log_proto_rawDesc), len(file_api_v1_log_proto_rawDesc)))
 	})
-	return file_proto_v1_log_proto_rawDescData
+	return file_api_v1_log_proto_rawDescData
 }
 
-var file_proto_v1_log_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_proto_v1_log_proto_goTypes = []any{
-	(*SearchLogsRequest)(nil),  // 0: proto.v1.SearchLogsRequest
-	(*EmptyResponse)(nil),      // 1: proto.v1.EmptyResponse
-	(*StreamLogsResponse)(nil), // 2: proto.v1.StreamLogsResponse
-	(*Log)(nil),                // 3: proto.v1.Log
-	(*StreamLogsRequest)(nil),  // 4: proto.v1.StreamLogsRequest
-	(*SearchLogsResponse)(nil), // 5: proto.v1.SearchLogsResponse
+var file_api_v1_log_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_v1_log_proto_goTypes = []any{
+	(*SearchLogsRequest)(nil),   // 0: api.v1.SearchLogsRequest
+	(*EmptyResponse)(nil),       // 1: api.v1.EmptyResponse
+	(*StreamLogsResponse)(nil),  // 2: api.v1.StreamLogsResponse
+	(*Log)(nil),                 // 3: api.v1.Log
+	(*StreamLogsRequest)(nil),   // 4: api.v1.StreamLogsRequest
+	(*SearchLogsResponse)(nil),  // 5: api.v1.SearchLogsResponse
+	(*GetLogCountRequest)(nil),  // 6: api.v1.GetLogCountRequest
+	(*GetLogCountResponse)(nil), // 7: api.v1.GetLogCountResponse
 }
-var file_proto_v1_log_proto_depIdxs = []int32{
-	1, // 0: proto.v1.StreamLogsResponse.res:type_name -> proto.v1.EmptyResponse
-	3, // 1: proto.v1.StreamLogsRequest.log:type_name -> proto.v1.Log
-	3, // 2: proto.v1.SearchLogsResponse.log:type_name -> proto.v1.Log
-	4, // 3: proto.v1.LoggyService.StreamLogs:input_type -> proto.v1.StreamLogsRequest
-	0, // 4: proto.v1.LoggyService.SearchLogs:input_type -> proto.v1.SearchLogsRequest
-	2, // 5: proto.v1.LoggyService.StreamLogs:output_type -> proto.v1.StreamLogsResponse
-	5, // 6: proto.v1.LoggyService.SearchLogs:output_type -> proto.v1.SearchLogsResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
+var file_api_v1_log_proto_depIdxs = []int32{
+	1, // 0: api.v1.StreamLogsResponse.res:type_name -> api.v1.EmptyResponse
+	3, // 1: api.v1.StreamLogsRequest.log:type_name -> api.v1.Log
+	3, // 2: api.v1.SearchLogsResponse.log:type_name -> api.v1.Log
+	4, // 3: api.v1.LoggyService.StreamLogs:input_type -> api.v1.StreamLogsRequest
+	0, // 4: api.v1.LoggyService.SearchLogs:input_type -> api.v1.SearchLogsRequest
+	6, // 5: api.v1.LoggyService.GetLogCount:input_type -> api.v1.GetLogCountRequest
+	2, // 6: api.v1.LoggyService.StreamLogs:output_type -> api.v1.StreamLogsResponse
+	5, // 7: api.v1.LoggyService.SearchLogs:output_type -> api.v1.SearchLogsResponse
+	7, // 8: api.v1.LoggyService.GetLogCount:output_type -> api.v1.GetLogCountResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_proto_v1_log_proto_init() }
-func file_proto_v1_log_proto_init() {
-	if File_proto_v1_log_proto != nil {
+func init() { file_api_v1_log_proto_init() }
+func file_api_v1_log_proto_init() {
+	if File_api_v1_log_proto != nil {
 		return
 	}
+	file_api_v1_log_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_v1_log_proto_rawDesc), len(file_proto_v1_log_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_v1_log_proto_rawDesc), len(file_api_v1_log_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_v1_log_proto_goTypes,
-		DependencyIndexes: file_proto_v1_log_proto_depIdxs,
-		MessageInfos:      file_proto_v1_log_proto_msgTypes,
+		GoTypes:           file_api_v1_log_proto_goTypes,
+		DependencyIndexes: file_api_v1_log_proto_depIdxs,
+		MessageInfos:      file_api_v1_log_proto_msgTypes,
 	}.Build()
-	File_proto_v1_log_proto = out.File
-	file_proto_v1_log_proto_goTypes = nil
-	file_proto_v1_log_proto_depIdxs = nil
+	File_api_v1_log_proto = out.File
+	file_api_v1_log_proto_goTypes = nil
+	file_api_v1_log_proto_depIdxs = nil
 }

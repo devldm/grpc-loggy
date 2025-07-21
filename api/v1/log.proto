@@ -1,11 +1,12 @@
 syntax = "proto3";
-package proto.v1;
+package api.v1;
 
-option go_package = "./proto";
+option go_package = "./";
 
 service LoggyService {
   rpc StreamLogs(stream StreamLogsRequest) returns (StreamLogsResponse);
   rpc SearchLogs(SearchLogsRequest) returns (SearchLogsResponse);
+  rpc GetLogCount(GetLogCountRequest) returns (GetLogCountResponse);
 }
 
 message SearchLogsRequest {
@@ -32,4 +33,14 @@ message StreamLogsRequest {
 message SearchLogsResponse {
   int32 total_count = 1;
   repeated Log log = 2;
+}
+
+message GetLogCountRequest {
+  bool include_archive = 1;
+}
+
+message GetLogCountResponse {
+  int32 total_count = 1;
+  int32 active_count = 2;
+  optional int32 archive_count = 3;
 }
